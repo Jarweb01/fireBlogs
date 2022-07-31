@@ -3,17 +3,20 @@
     <div class="app">
       <TheNavigation />
       <router-view />
+      <TheFooter />
     </div>
   </div>
 </template>
 
 <script>
-import TheNavigation from './components/TheNavigation.vue'
+import TheNavigation from "./components/TheNavigation.vue";
+import TheFooter from "./components/TheFooter.vue";
 
 export default {
   name: "app",
   components: {
     TheNavigation,
+    TheFooter,
   },
   data() {
     return {};
