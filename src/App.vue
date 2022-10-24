@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <TheNavigation />
+      <TheNavigation v-if="!navigation" />
       <router-view />
-      <TheFooter />
+      <TheFooter v-if="!navigation" />
     </div>
   </div>
 </template>
@@ -19,12 +19,32 @@ export default {
     TheFooter,
   },
   data() {
-    return {};
+    return {
+      navigation: null,
+    };
   },
-  created() {},
+  created() {
+    this.checkRoute();
+  },
   mounted() {},
-  methods: {},
-  watch: {},
+  methods: {
+    checkRoute() {
+      if (
+        this.$route.name === "Login" ||
+        this.$route.name === "Register" ||
+        this.$route.name === "ForgotPassword"
+      ) {
+        this.navigation = true;
+        return;
+      }
+      this.navigation = false;
+    },
+  },
+  watch: {
+    $route() {
+      this.checkRoute();
+    },
+  },
 };
 </script>
 
@@ -74,6 +94,7 @@ export default {
   }
 }
 
+button,
 .button,
 .routerBtn {
   transition: 500ms ease all;
@@ -123,6 +144,12 @@ export default {
   pointer-events: none !important;
   cursor: none !important;
   background-color: rgba(128, 128, 128, 0.5) !important;
+}
+
+.error {
+  text-align: center;
+  font-size: 12px;
+  color: red;
 }
 
 .blogCardWrap {
