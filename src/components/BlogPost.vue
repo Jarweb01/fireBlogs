@@ -1,5 +1,5 @@
 <template>
-  <div class="blogWrapper noUser">
+  <div class="blogWrapper" :class="{ noUser: !user }">
     <div class="blogContent">
       <div>
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
@@ -40,6 +40,11 @@ export default {
   props: {
     post: {
       type: Object,
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
     },
   },
 };
